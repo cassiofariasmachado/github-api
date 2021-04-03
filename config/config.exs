@@ -18,6 +18,9 @@ config :github, GithubWeb.Endpoint,
   pubsub_server: Github.PubSub,
   live_view: [signing_salt: "1aksZ+8O"]
 
+config :github, Github.Client,
+  adapter: Github.Client
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

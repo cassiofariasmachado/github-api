@@ -1,0 +1,9 @@
+{
+    "skip_files": [
+        "test/support",
+        "lib/github/application.ex",
+        "lib/github_web.ex",
+        "lib/github_web/router.ex",
+        "lib/github_web/views/error_helpers.ex"
+    ]
+}

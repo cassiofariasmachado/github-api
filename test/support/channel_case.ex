@@ -17,6 +17,8 @@ defmodule GithubWeb.ChannelCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with channels
@@ -29,10 +31,10 @@ defmodule GithubWeb.ChannelCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Github.Repo)
+    :ok = Sandbox.checkout(Github.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Github.Repo, {:shared, self()})
+      Sandbox.mode(Github.Repo, {:shared, self()})
     end
 
     :ok

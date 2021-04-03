@@ -6,4 +6,8 @@ defmodule Github do
   Contexts are also responsible for managing your data, regardless
   if it comes from the database, an external API or others.
   """
+
+  alias Github.Repositories.GetRepos, as: GetRepos
+
+  defdelegate get_repos_from_user(username), to: GetRepos, as: :call
 end
