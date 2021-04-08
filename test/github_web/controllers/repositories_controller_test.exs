@@ -1,12 +1,20 @@
 defmodule GithubWeb.RepositoriesControllerTest do
   use GithubWeb.ConnCase, async: true
 
-  import Github.Factory
+  import Github.{Factory, Support}
   import Mox
 
   alias Github.{ClientMock, Error}
 
   describe "index/2" do
+    setup %{conn: conn} do
+      user = insert(:user)
+
+      conn = puth_auth_header(conn, user)
+
+      {:ok, conn: conn}
+    end
+
     test "when user exits and has repositories, returns the repositories", %{conn: conn} do
       username = "cassiofariasmachado"
 

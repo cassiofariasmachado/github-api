@@ -10,6 +10,18 @@ use Mix.Config
 config :github,
   ecto_repos: [Github.Repo]
 
+config :github, Github.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id]
+
+config :github, GithubWeb.Auth.Guardian,
+  issuer: "github",
+  secret_key: "XWWyGS+0mCTgkR9zEIXqRQWk3nzcw4uxW/u5MMD2rEo5/ADeIZK33UH+338jArXO"
+
+config :github, GithubWeb.Auth.Pipeline,
+  module: GithubWeb.Auth.Guardian,
+  error_handler: GithubWeb.Auth.ErrorHandler
+
 # Configures the endpoint
 config :github, GithubWeb.Endpoint,
   url: [host: "localhost"],

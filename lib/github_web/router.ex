@@ -5,10 +5,21 @@ defmodule GithubWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug GithubWeb.Auth.Pipeline
+  end
+
+  scope "/api", GithubWeb do
+    pipe_through [:api, :auth]
+
+    resources "/users/:username/repos", RepositoriesController, only: [:index]
+  end
+
   scope "/api", GithubWeb do
     pipe_through :api
 
-    resources "/users/:username/repos", RepositoriesController, only: [:index]
+    post "/users", UsersController, :create
+    post "/users/sign-in", UsersController, :sign_in
   end
 
   # Enables LiveDashboard only for development

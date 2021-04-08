@@ -7,7 +7,13 @@ defmodule Github do
   if it comes from the database, an external API or others.
   """
 
-  alias Github.Repositories.GetRepos, as: GetRepos
+  alias Github.Repositories.Get, as: GetRepos
 
-  defdelegate get_repos_from_user(username), to: GetRepos, as: :call
+  alias Github.Users.Create, as: CreateUser
+  alias Github.Users.Get, as: GetUser
+
+  defdelegate get_repos_from_user(username), to: GetRepos, as: :from_user
+
+  defdelegate create_user(params), to: CreateUser, as: :call
+  defdelegate get_user_by_id(id), to: GetUser, as: :by_id
 end

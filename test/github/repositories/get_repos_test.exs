@@ -5,7 +5,7 @@ defmodule Github.Repositories.GetReposTest do
   import Github.Factory
 
   alias Github.ClientMock
-  alias Github.Repositories.GetRepos
+  alias Github.Repositories.Get
 
   describe "call/1" do
     test "returns repos" do
@@ -17,7 +17,7 @@ defmodule Github.Repositories.GetReposTest do
         {:ok, repos}
       end)
 
-      response = GetRepos.call(username)
+      response = Get.from_user(username)
 
       expected_response = {:ok, repos}
 
