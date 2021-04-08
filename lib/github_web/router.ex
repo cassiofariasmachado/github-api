@@ -1,8 +1,11 @@
 defmodule GithubWeb.Router do
   use GithubWeb, :router
 
+  alias GithubWeb.Plugs.RefreshToken
+
   pipeline :api do
     plug :accepts, ["json"]
+    plug RefreshToken
   end
 
   pipeline :auth do
